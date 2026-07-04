@@ -1,25 +1,24 @@
 # One-Step Limits of Randomized Speculative Decoding
 
-
 The repository supports reproducibility for the empirical checks reported in the paper. These checks illustrate the one-step accepted-prefix abstraction studied in the manuscript. They are not end-to-end speculative-decoding serving benchmarks and do not measure wall-clock inference speedup.
 
 ## Paper summary
 
-The paper studies a one-step abstraction of speculative decoding. For a fixed context and a parallel proposal budget \(P\), a non-anticipating policy proposes up to \(P\) candidate continuations before observing verifier feedback. The accepted length is the longest prefix that agrees with the verifier continuation.
+The paper studies a one-step abstraction of speculative decoding. For a fixed context and a parallel proposal budget P, a non-anticipating policy proposes up to P candidate continuations before observing verifier feedback. The accepted length is the longest prefix that agrees with the verifier continuation.
 
 The main theorem shows that, for any verifier prefix law and any deterministic or randomized non-anticipating policy,
 
-\[
-\Pr(L_P \ge \ell) \le M_P(\ell),
-\]
+```math
+\Pr(L_P \ge \ell) \le M_P(\ell)
+```
 
-where \(M_P(\ell)\) is the largest verifier-prefix probability mass coverable by any \(P\) length-\(\ell\) prefixes.
+where M_P(ℓ) is the largest verifier-prefix probability mass coverable by any P length-ℓ prefixes.
 
 The result identifies covered verifier-prefix mass as the fixed-depth bottleneck in this one-step model. Randomization cannot improve on the best deterministic prefix cover at a fixed depth when the verifier prefix law is fixed.
 
 ## Scope of the experiments
 
-The experiments in this repository are inference-only checks of the one-step accepted-prefix model. They are designed to illustrate the logarithmic-in-\(P\) behavior and diminishing returns predicted by the theory.
+The experiments in this repository are inference-only checks of the one-step accepted-prefix model. They are designed to illustrate the logarithmic-in-P behavior and diminishing returns predicted by the theory.
 
 They do not model or measure:
 
@@ -47,13 +46,13 @@ The synthetic experiments evaluate stylized i.i.d. verifier distributions over a
 - Zipf laws
 - Dirichlet-sampled laws
 
-The purpose is to check whether the accepted-prefix length grows approximately linearly in \(\log P\), with steeper growth for more concentrated distributions.
+The purpose is to check whether the accepted-prefix length grows approximately linearly in log P, with steeper growth for more concentrated distributions.
 
 The main settings used in the manuscript are:
 
-- vocabulary size: \(V = 2000\)
-- horizon: \(T = 64\)
-- proposal budgets: \(P = 2^k\), for \(k = 0,\ldots,12\)
+- vocabulary size: V = 2000
+- horizon: T = 64
+- proposal budgets: P = 2^k, for k = 0,...,12
 - Monte Carlo trials: 800 per condition
 
 ### 2. Logits-based checks
@@ -74,8 +73,8 @@ No model training or fine-tuning is performed.
 
 The GPT-2 logits experiment uses:
 
-- horizon: \(T = 48\)
-- proposal budgets: \(P = 2^k\), for \(k = 0,\ldots,11\)
+- horizon: T = 48
+- proposal budgets: P = 2^k, for k = 0,...,11
 - prompts: 100
 - trials per prompt-budget pair: 600
 - truncation: top 2000 tokens
@@ -120,17 +119,17 @@ The experiments require standard scientific Python packages and, for the logits-
 Run the provided scripts from the repository root. The workflow is:
 
 1. generate or load the synthetic verifier laws;
-2. run the finite-\(P\) accepted-prefix simulations;
+2. run the finite-P accepted-prefix simulations;
 3. extract next-token logits for the selected language models;
 4. apply top-2000 truncation and renormalization;
-5. compute the candidate-integrated finite-\(P\) estimates;
+5. compute the candidate-integrated finite-P estimates;
 6. generate the figures and tables reported in the manuscript.
 
 ## Output
 
 The experiments produce:
 
-- finite-\(T\) scaling summaries;
+- finite-T scaling summaries;
 - synthetic-law scaling plots;
 - GPT-2 logits scaling plots;
 - multi-model logits scaling plots;
@@ -151,7 +150,6 @@ If you use this repository, please cite the associated manuscript:
   note    = {Manuscript under review}
 }
 ```
-
 
 ## License
 
