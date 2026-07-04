@@ -1,1 +1,1 @@
-# randomized-speculative-decoding
+# One-Step Limits of Randomized Speculative Decoding
